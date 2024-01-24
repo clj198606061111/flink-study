@@ -78,6 +78,18 @@ masters相关配置信息
 flink01:8081
 ````
 
+- 配置项(flink02)
+```yaml
+## 只需改下面这一项就可以了，其他的和flink01保持一致
+taskmanager.host: flink02
+```
+
+- 配置项(flink03)
+```yaml
+## 只需改下面这一项就可以了，其他的和flink01保持一致
+taskmanager.host: flink03
+```
+
 ----
 ## 获取github ip 进行加速，获取到ip 后配置到hosts
 https://sites.ipaddress.com/github.com/
