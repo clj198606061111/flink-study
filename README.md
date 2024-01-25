@@ -91,5 +91,24 @@ taskmanager.host: flink03
 ```
 
 ----
+## flink应用程序部署
+### 打包
+```shell
+mvn clean package
+```
+
+### flink管理端页面提交
+````shell
+http://flink01:8081/#/submit
+````
+
+### flink命令行提交作业
+````shell
+./bin/flink run -m flink01:8081 -c com.itclj.wc.WordCountStreamUnboundedDemo /root/flink-study-1.0-SNAPSHOT.jar
+
+````
+
+
+----
 ## 获取github ip 进行加速，获取到ip 后配置到hosts
 https://sites.ipaddress.com/github.com/
