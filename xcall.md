@@ -3,6 +3,12 @@
 - 在一个节点上输入命令可以同步到其余节点执行
 - 建议创建脚本目录为:/usr/local/bin
 
+### 用法
+```shell
+## xcall 命令
+xcall mkdir hadoop
+```
+
 shell脚本
 ```shell
 #!/bin/bash
