@@ -20,7 +20,7 @@ public class WordCountStreamUnboundedDemo {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
         //2. 读取数据
-        DataStreamSource<String> sockDS = env.socketTextStream("192.168.10.151", 7777);
+        DataStreamSource<String> sockDS = env.socketTextStream("192.168.10.152", 7777);
 
         //3. 处理数据
         SingleOutputStreamOperator<Tuple2<String, Integer>> sum = sockDS.flatMap(new FlatMapFunction<String, Tuple2<String, Integer>>() {
