@@ -80,7 +80,7 @@ xcall echo $HADOOP_HOME
 
 #### hdfs-site.xml
 
-- /opt/hadoop/hadoop-3.3.6/etc/hadoop/hdfs-site.xml
+- /opt/hdoaop/hadoop-3.3.6/etc/hadoop/hdfs-site.xml
 
 | 配置key | 配置值                       | 配置说明            |
 | --- |---------------------------|-----------------|
@@ -138,7 +138,80 @@ export YARN_NODEMANAGER_USER=hdfs
 start-dfs.sh && start-yarn.sh
 
 stop-dfs.sh && stop-yarn.sh
+
+/opt/hadoop/hadoop-3.3.6/sbin/start-dfs.sh && /opt/hadoop/hadoop-3.3.6/sbin/start-yarn.sh
+
+/opt/hadoop/hadoop-3.3.6/sbin/stop-dfs.sh && /opt/hadoop/hadoop-3.3.6/sbin/stop-yarn.sh
+
+hdfs dfsadmin -report
 ```
+
+- 启动后查看hdfs状态
+````shell
+[hdfs@flink01 logs]$ hdfs dfsadmin -report
+Configured Capacity: 36477861888 (33.97 GB)
+Present Capacity: 29015072768 (27.02 GB)
+DFS Remaining: 28794200064 (26.82 GB)
+DFS Used: 220872704 (210.64 MB)
+DFS Used%: 0.76%
+Replicated Blocks:
+        Under replicated blocks: 0
+        Blocks with corrupt replicas: 0
+        Missing blocks: 0
+        Missing blocks (with replication factor 1): 0
+        Low redundancy blocks with highest priority to recover: 0
+        Pending deletion blocks: 0
+Erasure Coded Block Groups: 
+        Low redundancy block groups: 0
+        Block groups with corrupt internal blocks: 0
+        Missing block groups: 0
+        Low redundancy blocks with highest priority to recover: 0
+        Pending deletion blocks: 0
+
+-------------------------------------------------
+Live datanodes (2):
+
+Name: 192.168.10.153:9866 (flink02)
+Hostname: flink02
+Decommission Status : Normal
+Configured Capacity: 18238930944 (16.99 GB)
+DFS Used: 176246784 (168.08 MB)
+Non DFS Used: 3727683584 (3.47 GB)
+DFS Remaining: 14335000576 (13.35 GB)
+DFS Used%: 0.97%
+DFS Remaining%: 78.60%
+Configured Cache Capacity: 0 (0 B)
+Cache Used: 0 (0 B)
+Cache Remaining: 0 (0 B)
+Cache Used%: 100.00%
+Cache Remaining%: 0.00%
+Xceivers: 0
+Last contact: Wed Apr 03 23:47:24 EDT 2024
+Last Block Report: Wed Apr 03 23:46:09 EDT 2024
+Num of Blocks: 15
+
+
+Name: 192.168.10.154:9866 (flink03)
+Hostname: flink03
+Decommission Status : Normal
+Configured Capacity: 18238930944 (16.99 GB)
+DFS Used: 44625920 (42.56 MB)
+Non DFS Used: 3735105536 (3.48 GB)
+DFS Remaining: 14459199488 (13.47 GB)
+DFS Used%: 0.24%
+DFS Remaining%: 79.28%
+Configured Cache Capacity: 0 (0 B)
+Cache Used: 0 (0 B)
+Cache Remaining: 0 (0 B)
+Cache Used%: 100.00%
+Cache Remaining%: 0.00%
+Xceivers: 0
+Last contact: Wed Apr 03 23:47:24 EDT 2024
+Last Block Report: Wed Apr 03 23:46:09 EDT 2024
+Num of Blocks: 12
+
+
+````
 
 - 启动后进入namenode节点查看hdfs集群信息
 ```shell

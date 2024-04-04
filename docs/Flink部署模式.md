@@ -1,8 +1,9 @@
 # flink 部署模式
 
-1. 会话模式（Session MOde）
-2. 单作业模式（Per-Job Mode）-- 已标记为过时
-3. 应用模型（Application Mode）
+1. standalone
+2. 【yarn】会话模式（Session Mode）
+3. 【yarn】单作业模式（Per-Job Mode）-- 已标记为过时
+4. 【yarn】应用模型（Application Mode） -- 推荐
 
 他们的主要区别在于：集群的 **生命周期** 以及 **资源的分配方式** ；以及应用的main方法到底在哪里执行--客户端（client）,还是jobManager。
 
@@ -30,12 +31,24 @@ export HADOP_CONF_DIR=${HADOOP_HOME}/etc/hadoop
 export HADOOP_CLASSPATH=`hadoop classpath`
 ````
 
-### 启动flink集群
+###  会话模式
 
+```shell
+/opt/flink/flink-1.17.1/bin/yarn-session.sh -nm itclj-20240228-2222 -d 
+```
 参数说明：
 - -d: 分离模式，如果不想让flink yarn 客户端一直前台运行，可以使用这个参数，即使关闭当前对话框，yarn session 也可以后台运行。
 - -jm（--jobManagerMemory）: 配置JObManager 所需内存，默认单位 MB。
 - -nm（--name）:配置在yarn ui界面上显示的任务名称。
+
+###  应用模式
+
+- 执行命令提交作业
 ```shell
-/opt/flink/flink-1.17.1/bin/yarn-session.sh -nm itclj-20240228-2222 -d 
+
+```
+
+- 执行命令查看或取消作业
+```shell
+
 ```
