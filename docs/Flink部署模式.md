@@ -49,6 +49,8 @@ export HADOOP_CLASSPATH=`hadoop classpath`
 
 ```
 
+更多参数 及参数说明参看官方文档：https://nightlies.apache.org/flink/flink-docs-release-1.19/docs/deployment/config/
+
 - 执行命令查看或取消作业
 ```shell
 /opt/flink/flink-1.17.1/bin/flink  list -t yarn-application -Dyarn.application.id=application_1712202419852_0003	
