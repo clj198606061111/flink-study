@@ -45,10 +45,34 @@ export HADOOP_CLASSPATH=`hadoop classpath`
 
 - 执行命令提交作业
 ```shell
+/opt/flink/flink-1.17.1/bin/flink run-application -t yarn-application -c com.itclj.wc.WordCountStreamUnboundedDemo /opt/flink/libs/flink-study-1.1.1.jar
 
 ```
 
 - 执行命令查看或取消作业
 ```shell
+/opt/flink/flink-1.17.1/bin/flink  list -t yarn-application -Dyarn.application.id=application_1712202419852_0003	
 
+/opt/flink/flink-1.17.1/bin/flink  cancel -t yarn-application -Dyarn.application.id=application_XXXXX_xxxx <jobId>
+
+# 举例，eg:
+/opt/flink/flink-1.17.1/bin/flink  cancel -t yarn-application -Dyarn.application.id=application_1712202419852_0003 56c46aa1d1f3f441988e8c801af8925f
+
+```
+
+- 提交到hdfs
+```shell
+## 先把flink相关包上传到hdfs
+hadoop fs -mkdir /flink-dist
+hadoop fs -put /opt/flink/flink-1.17.1/lib/ /flink-dist
+hadoop fs -put /opt/flink/flink-1.17.1/plugins/ /flink-dist
+
+
+## 再把应用包上传到hdfs
+hadoop fs -mkdir /flink-jars
+hadoop fs -put /opt/flink/libs/flink-study-1.1.1.jar /flink-jars
+
+
+## 启动flink程序
+/opt/flink/flink-1.17.1/bin/flink run-application -t yarn-application -Dyarn.provided.lib.dirs="hdfs://flink01:9000/flink-dist" -c com.itclj.wc.WordCountStreamUnboundedDemo hdfs://flink01:9000/flink-jars/flink-study-1.1.1.jar
 ```
