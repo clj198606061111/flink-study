@@ -17,6 +17,9 @@
 ## 程序jar包需要放到flink的lib目录
 ./bin/standalone-job.sh start --job-classname com.itclj.wc.WordCountStreamUnboundedDemo
 ````
+- 资源申请&启动过程
+![资源申请&启动过程](../imgs/flink运行时模式-standalone会话模式.drawio.png)
+
 ## Yarn运行模式（重点）
 flink和hadoop集成，通过配置环境变量方式，最方便。
 
