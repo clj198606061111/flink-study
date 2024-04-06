@@ -18,6 +18,7 @@
 ./bin/standalone-job.sh start --job-classname com.itclj.wc.WordCountStreamUnboundedDemo
 ````
 - 资源申请&启动过程
+
 ![资源申请&启动过程](../imgs/flink运行时模式-standalone会话模式.drawio.png)
 
 ## Yarn运行模式（重点）
