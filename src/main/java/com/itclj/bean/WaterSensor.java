@@ -36,4 +36,9 @@ public class WaterSensor {
     public void setVc(Integer vc) {
         this.vc = vc;
     }
+
+    @Override
+    public String toString() {
+        return "id=" + id + ",ts=" + ts + ",vc=" + vc;
+    }
 }
