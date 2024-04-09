@@ -7,6 +7,10 @@ public class WaterSensor {
 
     private Integer vc;
 
+    public WaterSensor(){
+
+    }
+
     public WaterSensor(String id, Long ts, Integer vc) {
         this.id = id;
         this.ts = ts;
