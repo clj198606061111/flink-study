@@ -6,6 +6,11 @@ import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.co.CoMapFunction;
 
+/**
+ * 使用Connect合流
+ * 1. 一次只能连接2条流
+ * 2. 不同数据对象用不同的处理map
+ */
 public class ConnectDemo {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
