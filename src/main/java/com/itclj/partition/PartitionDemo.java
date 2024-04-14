@@ -14,11 +14,11 @@ public class PartitionDemo {
         //shuffle 随机分区：random.nextInt (下游算子并行度)
         //sockDS.shuffle().print();
 
-        //rebalance 轮训：
+        //rebalance 轮询：
         //如果是数据源倾斜的场景，source读进来后，调用rebalance,就可以解决数据源的数据倾斜
         //sockDS.rebalance().print();
 
-        //rescale缩放：实现轮训，局部组队，比rebalance更高效
+        //rescale 缩放：实现轮训，局部组队，比rebalance更高效
         //sockDS.rescale().print();
 
         //broadcast 广播，发送给下游所有子任务
