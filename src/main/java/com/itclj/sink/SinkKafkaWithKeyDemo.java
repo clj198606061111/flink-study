@@ -24,6 +24,11 @@ public class SinkKafkaWithKeyDemo {
         SingleOutputStreamOperator<String> sensorDS = env.socketTextStream("flink01", 7777);
 
         //KafkaSink
+        /**
+         * 如果要指定写入kafka的key
+         * 可以自定义反序列化器：
+         * 1. 实现 一个接口 重写 序列化器
+         */
         KafkaSink<String> kafkaSink = KafkaSink.<String>builder()
                 .setBootstrapServers("localhost:9092")
                 .setRecordSerializer(
