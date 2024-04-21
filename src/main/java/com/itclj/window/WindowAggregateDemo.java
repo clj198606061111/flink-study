@@ -26,6 +26,12 @@ public class WindowAggregateDemo {
         WindowedStream<WaterSensor, String, TimeWindow> sensorWS = sensorKS.window(TumblingProcessingTimeWindows.of(Time.seconds(5)));
 
         //2. 窗口函数：增量聚合 aggregate
+        /**
+         * 1. 属于本窗口的第一条数据来，创建窗口，创建累加器
+         * 2. 增量聚合：来一条计算一条，调用一次add方法
+         * 3. 窗口输出时，调用一次getResult方法
+         * 4. 输入、中间累加器、输出 输出类型可以不一样，非常灵活
+         */
         SingleOutputStreamOperator<String> aggregate = sensorWS.aggregate(
                 /**
                  * 第一个类型：输入数据类型
