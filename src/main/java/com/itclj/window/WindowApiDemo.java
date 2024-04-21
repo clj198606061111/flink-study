@@ -43,8 +43,11 @@ public class WindowApiDemo {
         WindowedStream<WaterSensor, String, TimeWindow> sensorWS = sensorKS.window(TumblingProcessingTimeWindows.of(Time.seconds(10)));
 
         //增量聚合：来一条数据，计算一条数据，窗口触发的时候输出计算结果
+        //sensorWS.reduce();
+        //sensorWS.aggregate()
 
-        //全量聚合：
+        //全窗口函数：数据来了不计算，存起来，窗口触发的时候，计算并输出
+        //sensorWS.process()
 
         env.execute();
     }
