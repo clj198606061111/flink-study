@@ -10,6 +10,7 @@ import org.apache.flink.streaming.api.datastream.WindowedStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.windowing.ProcessWindowFunction;
 import org.apache.flink.streaming.api.windowing.assigners.ProcessingTimeSessionWindows;
+import org.apache.flink.streaming.api.windowing.assigners.SessionWindowTimeGapExtractor;
 import org.apache.flink.streaming.api.windowing.assigners.SlidingProcessingTimeWindows;
 import org.apache.flink.streaming.api.windowing.assigners.TumblingProcessingTimeWindows;
 import org.apache.flink.streaming.api.windowing.time.Time;
@@ -27,14 +28,16 @@ public class TimeWindowDemo {
         KeyedStream<WaterSensor, String> sensorKS = sensorDS.keyBy(sensor -> sensor.getId());
 
         //1. 窗口分配器
-        //滚动窗口
-        //WindowedStream<WaterSensor, String, TimeWindow> sensorWS = sensorKS.window(TumblingProcessingTimeWindows.of(Time.seconds(5)));
-
-        //滑动窗口，长度10秒，步长5秒
-        //WindowedStream<WaterSensor, String, TimeWindow> sensorWS = sensorKS.window(SlidingProcessingTimeWindows.of(Time.seconds(10),Time.seconds(5)));
-
-        //会话窗口，间隔5秒，5秒内没数据进入，进行计算输出
-        WindowedStream<WaterSensor, String, TimeWindow> sensorWS = sensorKS.window(ProcessingTimeSessionWindows.withGap(Time.seconds(5)));
+        WindowedStream<WaterSensor, String, TimeWindow> sensorWS = sensorKS
+                //.window(TumblingProcessingTimeWindows.of(Time.seconds(5)));//滚动窗口
+                //.window(SlidingProcessingTimeWindows.of(Time.seconds(10),Time.seconds(5)));//滑动窗口，长度10秒，步长5秒
+                //.window(ProcessingTimeSessionWindows.withGap(Time.seconds(5)));//会话窗口，间隔5秒，5秒内没数据进入，进行计算输出
+                .window(ProcessingTimeSessionWindows.withDynamicGap(new SessionWindowTimeGapExtractor<WaterSensor>() {
+                    @Override
+                    public long extract(WaterSensor element) {
+                        return element.getVc() * 1000;
+                    }
+                }));//会话窗口，动态间隔，每条数据都会更新间隔时间
 
         /**
          * 全窗口函数，窗口触发时才触发一次，统一计算
