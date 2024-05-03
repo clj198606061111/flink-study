@@ -17,10 +17,12 @@ public class MysqlSourceCDCCheckPointDemo {
         env.setParallelism(1);
         //1. 启用checkpointing ,默认是barrier对象，,间隔为5000毫米,检查模式为Exactly once
         env.enableCheckpointing(5000, CheckpointingMode.EXACTLY_ONCE);
-        env.setStateBackend(new FsStateBackend("file:///D:/bigdata/flink/data/state-backend"));
+        //状态后端可以不用在代码里面直接设置，一般用flink集群开启默认状态后端，直接用集群默认的状态后端就可以了
+        //env.setStateBackend(new FsStateBackend("file:///D:/bigdata/flink/data/state-backend"));
         CheckpointConfig checkpointConfig = env.getCheckpointConfig();
         //2. 设置检查点存储位置，
-        checkpointConfig.setCheckpointStorage("file:///D:/bigdata/flink/data/checkpoint");
+        //检查点位置也不用在代码里面直接设置，集群设置默认检查点保存位置比较好，或者在退吹的时候在命令行设置检查点位置，在程序代码里面设置检查点位置是一种不优化的动作
+        //checkpointConfig.setCheckpointStorage("file:///D:/bigdata/flink/data/checkpoint");
         //3. checkpoint的超时时间：默认10分钟
         checkpointConfig.setCheckpointTimeout(60000);//设置60秒
         //4. 同时运行中的checkpoint的最大数量
