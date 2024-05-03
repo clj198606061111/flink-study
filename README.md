@@ -95,6 +95,9 @@ taskmanager.host: flink03
 ### 打包
 ```shell
 mvn clean package
+
+## 下载源码
+mvn dependency:resolve -Dclassifier=sources
 ```
 
 ### flink管理端页面提交
