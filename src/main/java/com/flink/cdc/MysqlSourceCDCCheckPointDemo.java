@@ -4,8 +4,6 @@ import com.ververica.cdc.connectors.mysql.source.MySqlSource;
 import com.ververica.cdc.connectors.mysql.table.StartupOptions;
 import com.ververica.cdc.debezium.StringDebeziumDeserializationSchema;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
-import org.apache.flink.runtime.state.filesystem.FsStateBackend;
-import org.apache.flink.runtime.state.filesystem.FsStateBackendFactory;
 import org.apache.flink.streaming.api.CheckpointingMode;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.environment.CheckpointConfig;
@@ -35,10 +33,10 @@ public class MysqlSourceCDCCheckPointDemo {
         checkpointConfig.setTolerableCheckpointFailureNumber(0);
 
         MySqlSource<String> source = MySqlSource.<String>builder()
-                .hostname("127.0.0.1")
+                .hostname("192.168.0.105")
                 .port(3306)
-                .username("root")
-                .password("123456")
+                .username("itclj")
+                .password("itclj123456")
                 .databaseList("itclj")
                 .tableList("itclj.tags")
                 .deserializer(new StringDebeziumDeserializationSchema())

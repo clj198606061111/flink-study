@@ -39,3 +39,9 @@ net stop mysql
 ## 启动服务
 net start mysql
 ```
+
+### 给用户授权
+- mysql-5.7
+```sql
+grant all privileges on *.* to 'itclj'@'%' identified by 'itclj123456' with grant option;
+```
