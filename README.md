@@ -98,6 +98,9 @@ mvn clean package
 
 ## 下载源码
 mvn dependency:resolve -Dclassifier=sources
+
+## 打印依赖树
+mvn dependency:tree
 ```
 
 ### flink管理端页面提交

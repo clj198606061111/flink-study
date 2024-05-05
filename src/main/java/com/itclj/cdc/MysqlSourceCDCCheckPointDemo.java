@@ -1,4 +1,4 @@
-package com.flink.cdc;
+package com.itclj.cdc;
 
 import com.ververica.cdc.connectors.mysql.source.MySqlSource;
 import com.ververica.cdc.connectors.mysql.table.StartupOptions;

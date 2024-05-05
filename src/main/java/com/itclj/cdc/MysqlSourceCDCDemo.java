@@ -1,4 +1,4 @@
-package com.flink.cdc;
+package com.itclj.cdc;
 
 import com.ververica.cdc.connectors.mysql.source.MySqlSource;
 import com.ververica.cdc.connectors.mysql.table.StartupOptions;
@@ -12,10 +12,10 @@ public class MysqlSourceCDCDemo {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
         MySqlSource<String> source = MySqlSource.<String>builder()
-                .hostname("127.0.0.1")
+                .hostname("192.168.0.105")
                 .port(3306)
-                .username("root")
-                .password("123456")
+                .username("itclj")
+                .password("itclj123456")
                 .databaseList("itclj")
                 .tableList("itclj.tags")
                 .deserializer(new StringDebeziumDeserializationSchema())

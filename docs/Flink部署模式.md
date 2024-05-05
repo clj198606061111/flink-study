@@ -78,6 +78,12 @@ hadoop fs -put /opt/flink/flink-1.17.1/plugins/ /flink-dist
 hadoop fs -mkdir /flink-jars
 hadoop fs -put /opt/flink/libs/flink-study-1.1.1.jar /flink-jars
 
+## 查看hdfs上上传的文件
+hadoop fs -ls /flink-jars
+
+## 删除hdfs上的文件
+hadoop fs -rm /flink-jars/flink-study-1.1.2-jar-with-dependencies.jar
+
 
 ## 启动flink程序
 /opt/flink/flink-1.17.1/bin/flink run-application -t yarn-application -Dyarn.provided.lib.dirs="hdfs://flink01:9000/flink-dist" -c com.itclj.wc.WordCountStreamUnboundedDemo hdfs://flink01:9000/flink-jars/flink-study-1.1.1.jar
