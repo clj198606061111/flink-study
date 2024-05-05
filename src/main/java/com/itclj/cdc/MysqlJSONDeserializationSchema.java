@@ -16,6 +16,9 @@ import java.util.List;
 /**
  * flink-cdc mysql binlog 自定义序列化器
  * 序列化后以一个JSON对象保存，方便后续处理
+ * <p>
+ * 格式化化后输出样例：
+ * {"db":"itclj","tableName":"tags","before":{"id":2,"tags":"c,d,e,f"},"after":{"id":2,"tags":"c,d,e,f,g"},"op":"u"}
  */
 public class MysqlJSONDeserializationSchema implements DebeziumDeserializationSchema<String> {
 
@@ -38,34 +41,16 @@ public class MysqlJSONDeserializationSchema implements DebeziumDeserializationSc
         //构建before数据
         Struct before = value.getStruct("before");
         if (null != before) {
-            //获取列信息
-            Schema beforeSchema = before.schema();
-            List<Field> fields = beforeSchema.fields();
-            JSONObject beforeJSON = new JSONObject();
-            for (Field field : fields) {
-                beforeJSON.put(field.name(), before.get(field));
-            }
-
-            result.put("before", beforeJSON);
+            result.put("before", getFieldsObject(before));
         }
-
 
         //够级after数据
         Struct after = value.getStruct("after");
         if (null != after) {
-            //获取列信息
-            Schema afterSchema = after.schema();
-            List<Field> fields = afterSchema.fields();
-            JSONObject afterJSON = new JSONObject();
-            for (Field field : fields) {
-                afterJSON.put(field.name(), after.get(field));
-            }
-
-            result.put("after", afterJSON);
+            result.put("after", getFieldsObject(after));
         }
         //构建op（操作类型）
-        Envelope.Operation operation = Envelope.operationFor(record);
-        result.put("op", operation.code());
+        result.put("op", Envelope.operationFor(record).code());
 
         out.collect(result.toJSONString());
     }
@@ -73,5 +58,16 @@ public class MysqlJSONDeserializationSchema implements DebeziumDeserializationSc
     @Override
     public TypeInformation<String> getProducedType() {
         return BasicTypeInfo.STRING_TYPE_INFO;
+    }
+
+    private JSONObject getFieldsObject(Struct after) {
+        //获取列信息
+        Schema schema = after.schema();
+        List<Field> fields = schema.fields();
+        JSONObject jsonObject = new JSONObject();
+        for (Field field : fields) {
+            jsonObject.put(field.name(), after.get(field));
+        }
+        return jsonObject;
     }
 }
