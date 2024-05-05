@@ -80,7 +80,8 @@
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-table-planner_2.12</artifactId>
             <version>${flink.version}</version>
-            <scope>test</scope>
+            <!--开启test后，执行flink sql会找不到类，类加载器有问题-->
+<!--            <scope>test</scope>-->
         </dependency>
     </dependencies>
 

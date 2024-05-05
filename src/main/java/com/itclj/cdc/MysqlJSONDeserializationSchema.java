@@ -1,6 +1,7 @@
 package com.itclj.cdc;
 
 import com.alibaba.fastjson2.JSONObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ververica.cdc.debezium.DebeziumDeserializationSchema;
 import io.debezium.data.Envelope;
 import org.apache.flink.api.common.typeinfo.BasicTypeInfo;
