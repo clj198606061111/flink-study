@@ -17,9 +17,12 @@
 ```
 
 - 查看创建的topic
-
+- 
 ```
 .\bin\windows\kafka-topics.bat --describe --topic itcljtest --bootstrap-server localhost:9092
+
+## 查看topic列表
+.\bin\windows\kafka-topics.bat --list --bootstrap-server localhost:9092
 ```
 
 ### 生产者
